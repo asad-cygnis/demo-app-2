@@ -13,7 +13,7 @@ jobs:
 
       - name: Check Tag
         id: get_tag_version
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: echo ::${GITHUB_REF#refs/*/}
 
       - name: yarn install
         run: yarn install
