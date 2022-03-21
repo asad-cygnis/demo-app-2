@@ -1,0 +1,199 @@
+{
+  "duration": 1211,
+  "problem": null,
+  "originalError": null,
+  "ok": true,
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "x-content-type-options": "nosniff",
+    "strict-transport-security": "max-age=0; includeSubDomains",
+    "nel": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+    "report-to": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=HYucw5Uni7l7mk3J5weij3rUpHFlCtuI6ZnujUwP7fXxsL3O8PNURRpQ4t9kTArc6%2BDH9lDIHcwtAgcr%2FcQFDS%2Bgk1cbED2XYWqZRpYs7UI3V4tGXbjQi%2FNba9uH0%2B5glraBiQrmxP3qdrfL\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+    "x-xss-protection": "1; mode=block",
+    "vary": "Accept-Encoding",
+    "alt-svc": "h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+    "cf-cache-status": "DYNAMIC",
+    "x-frame-options": "SAMEORIGIN",
+    "date": "Wed, 26 Jan 2022 12:58:06 GMT",
+    "server": "cloudflare",
+    "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+    "cache-control": "no-cache, private",
+    "cf-ray": "6d39e9284fec41a2-AMS"
+  },
+  "config": {
+    "url": "establishment",
+    "method": "get",
+    "headers": {
+      "Accept": "application/json",
+      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjFkYjc5Y2RkNDhkZDM4OTU0OTdiNGJiOWVkN2Q3MWRjNzg2MDg3OTZlMzViYWMzMmY2YzE0ZDJiYTc3YzEwM2QzZTc1ZjMwOTZkZGYyYjY1In0.eyJhdWQiOiI5NTU3IiwianRpIjoiMWRiNzljZGQ0OGRkMzg5NTQ5N2I0YmI5ZWQ3ZDcxZGM3ODYwODc5NmUzNWJhYzMyZjZjMTRkMmJhNzdjMTAzZDNlNzVmMzA5NmRkZjJiNjUiLCJpYXQiOjE2NDMyMDE4NjgsIm5iZiI6MTY0MzIwMTg2OCwiZXhwIjoxNjc0NzM3ODY3LCJzdWIiOiIzNzEiLCJzY29wZXMiOlsidXNlci5zaG93IiwidXBkYXRlLnJlZmVycmFsLmNvZGUiLCJpbnRlcmVzdC5pbmRleCIsInVzZXIudXBkYXRlIiwidXBkYXRlLnVzZXIuaW50ZXJlc3RzIiwidXBkYXRlLnVzZXIuZmF2b3JpdGUuZXN0YWJsaXNobWVudCIsInVzZXItZmF2b3JpdGUtZXN0YWJsaXNobWVudC5pbmRleCIsIm9mZmVyLmluZGV4Iiwib2ZmZXIuc2hvdyIsImVzdGFibGlzaG1lbnQuaW5kZXgiLCJlc3RhYmxpc2htZW50LnNob3ciLCJzdWJzY3JpcHRpb24uc3RvcmUiLCJvZmZlci1yZWRlZW0uc3RvcmUiLCJmaXZlLWEtZGF5LmluZGV4Iiwidmlldy5zdG9yZSIsInNlbmQtaW52aXRlLnN0b3JlIiwidXBkYXRlLmxvY2F0aW9uIiwidXNlci5jdXN0b21lci5hY3RpdmF0aW9uIiwidXNlci5yZXNlbmQuZW1haWwiLCJzdWJzY3JpcHRpb24uZGV0YWlsIiwic2hhcmUuc3RvcmUiLCJzaGFyZS5pbmRleCIsInNoYXJlLmRlc3Ryb3kiLCJlc3RhYmxpc2htZW50LWV2ZW50LmluZGV4IiwiZXN0YWJsaXNobWVudC1tZW51LmluZGV4IiwiY2F0ZWdvcnkuaW5kZXgiLCJzZWFyY2guYWxsIiwidXBkYXRlLnVzZXIuZmF2b3JpdGUub2ZmZXIiLCJ1c2VyLWZhdm9yaXRlLW9mZmVyLmluZGV4IiwidXBkYXRlLnVzZXIuYm9va21hcmsuZXZlbnQiLCJ1c2VyLWJvb2ttYXJrLWV2ZW50LmluZGV4IiwiaHlwZXJsaW5rLWV2ZW50LmluZGV4IiwiZXZlbnQtc2hhcmUuc3RvcmUiLCJldmVudC1zaGFyZS5pbmRleCIsImV2ZW50LXNoYXJlLmRlc3Ryb3kiLCJlc3RhYmxpc2htZW50LXNlZ21lbnQuaW5kZXgiLCJlc3RhYmxpc2htZW50LXN1YnNjcmlwdGlvbi5zdG9yZSIsImVzdGFibGlzaG1lbnQtc3Vic2NyaXB0aW9uLmRldGFpbCIsImFwcC1zaGFyZWQuc3RvcmUiLCJhcHAtc2hhcmVkLmluZGV4Iiwidm91Y2hlci5pbmRleCIsInVzZXItdm91Y2hlci5pbmRleCIsInVzZXItbm90aWZpY2F0aW9uLmluZGV4IiwidXNlci5ub3QucmVhZC5ub3RpZmljYXRpb24iLCJ1c2VyLW5vdGlmaWNhdGlvbi51cGRhdGUiLCJvcmRlci5pbmRleCIsIm9yZGVyLnN0b3JlIiwib3JkZXIuc2hvdyIsImNhcnQuaW5kZXgiLCJjYXJ0LnN0b3JlIiwiY2FydC5zeW5jIiwicGF5bWVudC5zdG9yZSIsImFkZHJlc3MuaW5kZXgiLCJhZGRyZXNzLnN0b3JlIiwiYWRkcmVzcy51cGRhdGUiLCJhZGRyZXNzLmRlc3Ryb3kiLCJ2b3VjaGVyLmRldGFpbCIsIm9mZmVycy5kZXRhaWwiLCJjYXJ0LmNvdW50IiwiY2FyZC5pbmRleCIsImNhcmQuc3RvcmUiLCJjYXJkLmRlc3Ryb3kiLCJhdXRob3Jpc2Uub3JkZXIiLCJtb2RpZmllci1ncm91cC5pbmRleCIsIm1vZGlmaWVyLWdyb3VwLnN0b3JlIiwibW9kaWZpZXItZ3JvdXAuZGVzdHJveSIsIm1vZGlmaWVyLmluZGV4IiwibW9kaWZpZXIuc3RvcmUiLCJtb2RpZmllci5kZXN0cm95Iiwid2ViLnBheW1lbnQiLCJnZXQuY29yZGluYXRlc2JhciIsInBheW1lbnQuc2Vuc2UiLCJwYXltZW50LnNlbnNlLmNvbXBsZXRlIiwicGF5bWVudC51cGRhdGUiLCJlc3RhYmxpc2htZW50LW1lbnUuc2hvdyIsInJlLm9yZGVyIl19.jOjMHhDAmbFlg2bh4DuUnAp5sKOvm_tM3lksjFfGOYxXWBzB9WSNPaSUFVrE4vJR7kE1odyz-u7VV9Vh3vYbgYRBFm4F5N2SRxYN9l_c9F4iV85fgUqeRekiuEI50hQKVGJH34OSRPuiPSROHdxgZzH124tjJ2mA_ALvMMdyXVg0ZWaN4t-TCtCbn3wiPMF37rIKhgxXcM7zOwFzAnRoRa60dGN5tQksJ1Se-EpgrO4-pb-wjPH7z4mcWjdEXZOdbLrlc5K8g1g-oaQXuGVd5eAVgct8PeMTEPzzEADmt-z17xcpp8mtCVeW4hwsmuVfl_bMJUb20i2o8D2d1WIIKVLjwKYjRQeUVGRZaRRDFM3-uzSHRCiQYio3ozS-XTblA7YqbHRJaa3CDIUphflSKrMXUFIPV5KF-tueBkerF89j43ejGP2b-FHp_bdyP__G5e9-LVfGLtxw5CGv3AlJOJQg7plTNmvww5vO5oVh_UjpouJhmaPVTgSaZDPQckqLjeCk8koqYym8llHJc_9fr4lWFd9SsHbdbJtUkoayuafe-puf1NINwudJrCQktkjvBk7DApZumbOf_0gL5iIf5_qX0Isocx6ywAeFUqyh4LHuj1qH7vetL0nu2Etd16_PF1FAynKlpI3sWHqdEj1SGNZJ1l02WawjVhvHK5ywOYM"
+    },
+    "params": {
+      "page": 1,
+      "limit": 9,
+      "pagination": false,
+      "type": "oapa",
+      "keyword": "",
+      "is_for_map": "true"
+    },
+    "baseURL": "https://thebarcode-dev.cygnis.dev/api/",
+    "transformRequest": [null],
+    "transformResponse": [null],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1,
+    "transitional": {
+      "silentJSONParsing": true,
+      "forcedJSONParsing": true,
+      "clarifyTimeoutError": false
+    }
+  },
+  "data": {
+    "response": {
+      "data": [
+        {
+          "id": 341,
+          "title": "OAPA BAR",
+          "address": "Unnamed Road, Bangalore Town Block A Bangalore Town, Karachi, Karachi City, Sindh, Pakistan",
+          "latitude": 24.868712,
+          "longitude": 67.082357,
+          "is_oapa": true,
+          "is_unlimited_redemption": false,
+          "is_epos": 0,
+          "epos_name": "barcode",
+          "standard_offer": {
+            "id": 2009,
+            "establishment_id": 341,
+            "tier_id": 3,
+            "day": "Wednesday",
+            "value": 25,
+            "title": "25%",
+            "expires_at": null,
+            "created_at": "2022-01-10 06:43:28",
+            "updated_at": "2022-01-10 06:43:28"
+          },
+          "today_delivery_timings": {
+            "day": "Wednesday",
+            "from": "00:00:00",
+            "to": "23:59:59",
+            "status": "on"
+          },
+          "establishment_timings": {
+            "is_bar_open": true,
+            "opening_time": "00:00:00",
+            "closed_time": "00:00:00",
+            "status": "open",
+            "day": "Wednesday",
+            "opening_time_modify": {
+              "date": "2022-01-26 00:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/London"
+            },
+            "closed_time_modify": {
+              "date": "2022-01-26 00:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/London"
+            },
+            "is_unlimited_redemption": false
+          }
+        },
+        {
+          "id": 228,
+          "title": "A Place to Toast",
+          "address": "London",
+          "latitude": 24.868578,
+          "longitude": 67.082477,
+          "is_oapa": true,
+          "is_unlimited_redemption": false,
+          "is_epos": 0,
+          "epos_name": "barcode",
+          "standard_offer": {
+            "id": 1225,
+            "establishment_id": 228,
+            "tier_id": 3,
+            "day": "Wednesday",
+            "value": 25,
+            "title": "25%",
+            "expires_at": null,
+            "created_at": "2020-09-16 07:21:59",
+            "updated_at": "2020-09-16 07:21:59"
+          },
+          "today_delivery_timings": {
+            "day": "Wednesday",
+            "from": "00:00:00",
+            "to": "23:59:59",
+            "status": "on"
+          },
+          "establishment_timings": {
+            "is_bar_open": true,
+            "opening_time": "00:00:00",
+            "closed_time": "23:00:00",
+            "status": "open",
+            "day": "Wednesday",
+            "opening_time_modify": {
+              "date": "2022-01-26 00:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/London"
+            },
+            "closed_time_modify": {
+              "date": "2022-01-26 23:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/London"
+            },
+            "is_unlimited_redemption": false
+          }
+        },
+        {
+          "id": 342,
+          "title": "OAPA Venue Owner",
+          "address": "100 Shahrah-e-Faisal Service Rd N, Bangalore Town PECHS Extension Block A Bangalore Town, Karachi, Karachi City, Sindh 74200, Pakistan",
+          "latitude": 24.868712,
+          "longitude": 72.87740634,
+          "is_oapa": true,
+          "is_unlimited_redemption": false,
+          "is_epos": 1,
+          "epos_name": "squareup",
+          "standard_offer": {
+            "id": 2016,
+            "establishment_id": 342,
+            "tier_id": 3,
+            "day": "Wednesday",
+            "value": 25,
+            "title": "25%",
+            "expires_at": null,
+            "created_at": "2022-01-10 07:17:22",
+            "updated_at": "2022-01-10 07:17:22"
+          },
+          "today_delivery_timings": {
+            "day": "Wednesday",
+            "from": "00:00:00",
+            "to": "23:59:59",
+            "status": "on"
+          },
+          "establishment_timings": {
+            "is_bar_open": true,
+            "opening_time": "00:00:00",
+            "closed_time": "00:00:00",
+            "status": "open",
+            "day": "Wednesday",
+            "opening_time_modify": {
+              "date": "2022-01-26 00:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/London"
+            },
+            "closed_time_modify": {
+              "date": "2022-01-26 00:00:00.000000",
+              "timezone_type": 3,
+              "timezone": "Europe/London"
+            },
+            "is_unlimited_redemption": false
+          }
+        }
+      ],
+      "pagination": null,
+      "message": "Success."
+    }
+  }
+}

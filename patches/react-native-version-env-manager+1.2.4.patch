@@ -1,0 +1,18 @@
+diff --git a/node_modules/react-native-version-env-manager/lib/helpers.js b/node_modules/react-native-version-env-manager/lib/helpers.js
+index 7a8225c..0d4a113 100644
+--- a/node_modules/react-native-version-env-manager/lib/helpers.js
++++ b/node_modules/react-native-version-env-manager/lib/helpers.js
+@@ -77,11 +77,11 @@ module.exports = {
+   changeVersionAndBuildInGradle(pathToFile, version, build) {
+     let content = fs.readFileSync(pathToFile, 'utf8');
+     content = content.replace(
+-      /(\s*versionName\s+["']?)([+\w.-]+)(["']?\s*)/g,
++      /(\sversionName\s+[“‘]?)([+\w.-]+)([“‘]?\s)/g,
+       `$1${version}$3`
+     );
+     content = content.replace(
+-      /(\s*versionCode\s+["']?)(\d+)(["']?\s*)/g,
++      /(\sversionCode\s+[“‘]?)(\d+)([“’]?\s)/g, 
+       `$1${build}$3`
+     );
+     fs.writeFileSync(pathToFile, content, 'utf8');

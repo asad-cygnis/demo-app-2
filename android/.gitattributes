@@ -1,0 +1,13 @@
+# Windows files should use crlf line endings
+# https://help.github.com/articles/dealing-with-line-endings/
+*.bat text eol=crlf
+# Git Large File Storage Process in a nutshell
+# add the files you want tracked. 
+# add all csv files to git lfs tracking
+git lfs track "*.apk"
+# add git attributes
+git add .gitattributes
+
+
+
+*.apk filter=lfs diff=lfs merge=lfs -text
