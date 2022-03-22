@@ -13,22 +13,22 @@ jobs:
 
       - name: Check Tag
         id: get_tag_version
-        run: echo ::${GITHUB_REF#refs/*/} 
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/} 
 
       - name: yarn install
         run: yarn install
 
 
-      - if: contains(get_tag_version, "dev")
+      - if: contains(steps.get_tag_version.outputs.tag, "dev")
         run: yarn env:dev
 
-      - if: contains(get_tag_version, "qa")
+      - if: contains(steps.get_tag_version.outputs.tag, "qa")
         run: yarn env:qa
         
-      - if: contains(get_tag_version, "stag")
+      - if: contains(steps.get_tag_version.outputs.tag, "stag")
         run: yarn env:stag
 
-      - if: contains(get_tag_version, "prod")
+      - if: contains(steps.get_tag_version.outputs.tag, "prod")
         run: yarn env:prod
 
       - name: Install the Apple certificate and provisioning profile
