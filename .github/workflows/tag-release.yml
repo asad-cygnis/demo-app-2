@@ -36,7 +36,6 @@ jobs:
   release:
     runs-on: [macOS-latest]
     needs: [setUpEnv]
-    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
