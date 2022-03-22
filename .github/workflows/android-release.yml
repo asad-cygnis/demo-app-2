@@ -19,16 +19,16 @@ jobs:
         run: yarn install
 
 
-      - if: contains(steps.get_tag_version.outputs.tag, "dev")
+      - if: contains(steps.get_tag_version.outputs.tag,'dev')
         run: yarn env:dev
 
-      - if: contains(steps.get_tag_version.outputs.tag, "qa")
+      - if: contains(steps.get_tag_version.outputs.tag,'qa')
         run: yarn env:qa
         
-      - if: contains(steps.get_tag_version.outputs.tag, "stag")
+      - if: contains(steps.get_tag_version.outputs.tag,'stag')
         run: yarn env:stag
 
-      - if: contains(steps.get_tag_version.outputs.tag, "prod")
+      - if: contains(steps.get_tag_version.outputs.tag,'prod')
         run: yarn env:prod
 
       - name: Install the Apple certificate and provisioning profile
