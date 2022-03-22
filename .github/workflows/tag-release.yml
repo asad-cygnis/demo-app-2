@@ -75,8 +75,8 @@ jobs:
       # - name: Make iOS Release
       #   run: yarn releaseIOS
 
-      - name: Make Android Release
-        run: yarn releaseApk
+      # - name: Make Android Release
+      #   run: yarn releaseApk
 
       # - name: Upload Artifact
       #   uses: actions/upload-artifact@v1
