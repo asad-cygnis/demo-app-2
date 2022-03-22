@@ -72,8 +72,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-caches-
 
-      - name: Make iOS Release
-        run: yarn releaseIOS
+      # - name: Make iOS Release
+      #   run: yarn releaseIOS
 
       - name: Make Android Release
         run: yarn releaseApk
@@ -92,4 +92,3 @@ jobs:
           title: ${{steps.get_tag_version.outputs.tag}}
           files: |
             android/**/*.apk
-            builds/**/*.ipa
