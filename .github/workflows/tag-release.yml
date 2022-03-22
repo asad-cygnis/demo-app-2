@@ -11,6 +11,9 @@ jobs:
 
       - uses: actions/setup-node@v2
 
+      - name: yarn install
+        run: yarn install
+
       - name: Check Tag
         id: get_tag_version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
@@ -18,34 +21,31 @@ jobs:
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
         run: yarn env:dev
         outputs:
-          runs: ${{ true }}
+          status: ${{ true }}
 
       - if: contains(steps.get_tag_version.outputs.tag,'qa')
         run: yarn env:qa
         outputs:
-          runs: ${{ true }}
+          status: ${{ true }}
 
       - if: contains(steps.get_tag_version.outputs.tag,'stag')
         run: yarn env:stag
         outputs:
-          runs: ${{ true }}
+          status: ${{ true }}
 
       - if: contains(steps.get_tag_version.outputs.tag,'prod')
         run: yarn env:prod
         outputs:
-          runs: ${{ true }}
+          status: ${{ true }}
 
   release:
     runs-on: [macOS-latest]
     needs: [setUpEnv]
     if: |
-      needs.*.result
+      needs.setUpEnv.outputs.status
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-
-      - name: yarn install
-        run: yarn install
 
       - name: Install the Apple certificate and provisioning profile
         env:
