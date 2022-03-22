@@ -11,8 +11,8 @@ jobs:
 
       - uses: actions/setup-node@v2
 
-      # - name: yarn install
-      #   run: yarn install
+      - name: yarn install
+        run: yarn install
 
       - name: Check Tag
         id: get_tag_version
