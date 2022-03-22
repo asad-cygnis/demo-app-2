@@ -58,6 +58,9 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
+      - name: Make iOS Release
+        run: yarn releaseIOS
+
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
         with:
@@ -72,17 +75,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-caches-
 
-      # - name: Make iOS Release
-      #   run: yarn releaseIOS
+      - name: Make Android Release
+        run: yarn releaseApk
 
-      # - name: Make Android Release
-      #   run: yarn releaseApk
-
-      # - name: Upload Artifact
-      #   uses: actions/upload-artifact@v1
-      #   with:
-      #     name: release-apk
-      #     path: android/app/build/outputs/apk/release
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: release-apk
+          path: android/app/build/outputs/apk/release
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -91,3 +91,4 @@ jobs:
           title: ${{steps.get_tag_version.outputs.tag}}
           files: |
             android/**/*.apk
+            builds/**/*.ipa
