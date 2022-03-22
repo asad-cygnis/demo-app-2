@@ -18,6 +18,9 @@ jobs:
         id: get_tag_version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
+      - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') || !endsWith(steps.get_tag_version.outputs.tag,'-stag') || !endsWith(steps.get_tag_version.outputs.tag,'-qa') || !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
+        run: exit 1
+
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
         run: yarn env:dev
 
@@ -33,8 +36,7 @@ jobs:
   release:
     runs-on: [macOS-latest]
     needs: [setUpEnv]
-    if: |
-      needs.setUpEnv.outputs.status
+    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
