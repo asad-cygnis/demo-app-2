@@ -76,8 +76,8 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-      # - name: Make iOS Release
-      #   run: yarn releaseIOS
+      - name: Make iOS Release
+        run: yarn releaseIOS
 
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
