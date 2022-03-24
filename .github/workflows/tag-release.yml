@@ -25,6 +25,7 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
       - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
+      - id: step1
         run: exit 1
 
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
