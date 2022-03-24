@@ -50,8 +50,8 @@ jobs:
       - name: yarn install
         run: yarn install
 
-      -name: Set Env
-       run: yarn needs.setUpEnv.outputs.env   
+      - name: Set Env
+        run: yarn needs.setUpEnv.outputs.env   
 
       - name: Install the Apple certificate and provisioning profile
         env:
