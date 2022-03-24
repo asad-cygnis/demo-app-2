@@ -28,11 +28,11 @@ jobs:
         run: exit 1
 
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
-       - id: step2
+      - id: step2
         run: echo "::set-output name=env::env:dev"
 
       - if: contains(steps.get_tag_version.outputs.tag,'qa')
-       - id: step3
+      - id: step3
         run: echo "::set-output name=env::env:qa"
 
       - if: contains(steps.get_tag_version.outputs.tag,'stag')
@@ -40,7 +40,7 @@ jobs:
         run: echo "::set-output name=env::env:stag"
 
       - if: contains(steps.get_tag_version.outputs.tag,'prod')
-       - id: step4
+      - id: step4
         run: echo "::set-output name=env::env:prod"
 
   createiOSRelease:
