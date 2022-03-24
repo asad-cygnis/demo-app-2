@@ -122,7 +122,7 @@ jobs:
     steps:
       - name: Download artifact android
         uses: actions/download-artifact@v2
-        with: 
+        with:
           name: release-apk
 
       # - name: Download artifact from ios
@@ -135,6 +135,12 @@ jobs:
         run: |
           echo "::set-output name=release-apk::$(<release-apk/android/app/build/outputs/apk/release/)"
           # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
+
+      - name: Show the values of the outputs
+        run: |
+          # using the syntax steps.<step_id>.outputs.<output_name> to access the output parameters
+          echo "status_job1 = ${{ steps.set_outputs.outputs.release-apk }}"
+          echo "status_job2 = ${{ release-apk.outputs }}"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
