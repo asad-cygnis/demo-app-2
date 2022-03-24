@@ -118,23 +118,23 @@ jobs:
 
   publishRelease:
     runs-on: [macOS-latest]
-    needs: [createAndroidRelease, createiOSRelease]
+    needs: [createAndroidRelease]
     steps:
       - name: Download artifact android
         uses: actions/download-artifact@v2
-        with:
+        with: 
           name: release-apk
 
-      - name: Download artifact from ios
-        uses: actions/download-artifact@v2
-        with:
-          name: release-ipa
+      # - name: Download artifact from ios
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: release-ipa
 
       - name: Set apk and ipa as output parameters
         id: set_outputs
         run: |
-          echo "::set-output name=release-apk::$(<release-apk/android/**/*.apk)"
-          echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
+          echo "::set-output name=release-apk::$(<release-apk/android/app/build/outputs/apk/release/)"
+          # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -143,4 +143,4 @@ jobs:
           title: ${{steps.get_tag_version.outputs.tag}}
           files: |
             ${{ steps.set_outputs.outputs.release-apk }}
-            ${{ steps.set_outputs.outputs.release-ipa }}
+            # ${{ steps.set_outputs.outputs.release-ipa }}
