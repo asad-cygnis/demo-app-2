@@ -80,10 +80,10 @@ jobs:
         run: yarn releaseIOS
       
       - name: Upload Artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: release-ipa
-        path: builds/**/*.ipa   
+        uses: actions/upload-artifact@v1
+        with:
+          name: release-ipa
+          path: builds/**/*.ipa   
 
   createAndroidRelease:
    runs-on: [macOS-latest]
@@ -121,20 +121,20 @@ jobs:
    needs: [createAndroidRelease]
    steps:
     - name: Download artifact android
-        uses: actions/download-artifact@v1
-        with:
-          name: release-apk
+      uses: actions/download-artifact@v1
+      with:
+        name: release-apk
 
     - name: Download artifact from ios
-        uses: actions/download-artifact@v1
-        with:
-          name: release-ipa
+      uses: actions/download-artifact@v1
+      with:
+        name: release-ipa
 
-     - name: Set apk and ipa as output parameters
-    id: set_outputs
-    run: |
-      echo "::set-output name=release-apk::$(<release-apk/android/**/*.apk)"
-      echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"     
+    - name: Set apk and ipa as output parameters
+      id: set_outputs
+      run: |
+           echo "::set-output name=release-apk::$(<release-apk/android/**/*.apk)"
+           echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"     
 
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
