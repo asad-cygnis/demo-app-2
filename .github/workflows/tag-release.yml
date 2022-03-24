@@ -8,17 +8,17 @@ jobs:
     runs-on: [macOS-latest]
 
     outputs:
-      currentEnv: ${{steps.outputs.env}}
+      currentEnv: ${{steps.step1.outputs.env}}
 
     steps:
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v2
-        with:
-          cache: "yarn"
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     cache: "yarn"
 
-      - name: yarn install
-        run: yarn install
+      # - name: yarn install
+      #   run: yarn install
 
       - name: Check Tag
         id: get_tag_version
@@ -34,6 +34,7 @@ jobs:
         run: echo "::set-output name=env::env:qa"
 
       - if: contains(steps.get_tag_version.outputs.tag,'stag')
+      - id: step1
         run: echo "::set-output name=env::env:stag"
 
       - if: contains(steps.get_tag_version.outputs.tag,'prod')
@@ -96,6 +97,9 @@ jobs:
     runs-on: [macOS-latest]
     needs: [setUpEnv]
     steps:
+      - name: Set Env
+        run: yarn ${{needs.setUpEnv.outputs.currentEnv}}
+
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -103,9 +107,6 @@ jobs:
 
       - name: yarn install
         run: yarn install
-
-      - name: Set Env
-        run: yarn ${{needs.setUpEnv.outputs.currentEnv}}
 
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
