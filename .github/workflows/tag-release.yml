@@ -8,7 +8,7 @@ jobs:
     runs-on: [macOS-latest]
 
     outputs:
-      currentEnv: ${{steps.step1.outputs.env}}
+      currentEnv: ${{steps.outputs.env}}
 
     steps:
       - uses: actions/checkout@v2
@@ -25,23 +25,18 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
       - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
-      - id: step1
         run: exit 1
 
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
-      - id: step1
         run: echo "::set-output name=env::env:dev"
 
       - if: contains(steps.get_tag_version.outputs.tag,'qa')
-      - id: step1
         run: echo "::set-output name=env::env:qa"
 
       - if: contains(steps.get_tag_version.outputs.tag,'stag')
-      - id: step1
         run: echo "::set-output name=env::env:stag"
 
       - if: contains(steps.get_tag_version.outputs.tag,'prod')
-      - id: step1
         run: echo "::set-output name=env::env:prod"
 
   createiOSRelease:
