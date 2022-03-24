@@ -140,7 +140,6 @@ jobs:
         run: |
           # using the syntax steps.<step_id>.outputs.<output_name> to access the output parameters
           echo "status_job1 = ${{ steps.set_outputs.outputs.release-apk }}"
-          echo "status_job2 = ${{ release-apk.outputs }}"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
