@@ -118,7 +118,7 @@ jobs:
 
   publishRelease:
     runs-on: [macOS-latest]
-    needs: [createAndroidRelease]
+    needs: [createAndroidRelease, createiOSRelease]
     steps:
       - name: Download artifact android
         uses: actions/download-artifact@v2
