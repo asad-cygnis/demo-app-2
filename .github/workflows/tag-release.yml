@@ -81,9 +81,9 @@ jobs:
 
 
   createAndroidRelease:
-  runs-on: [macOS-latest]
-  needs: [setUpEnv]
-  steps:
+   runs-on: [macOS-latest]
+   needs: [setUpEnv]
+   steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
       with:
@@ -111,9 +111,9 @@ jobs:
     #     path: android/app/build/outputs/apk/release
 
   publishRelease:
-  runs-on: [macOS-latest]
-  needs: [createAndroidRelease, createiOSRelease]
-  steps:
+   runs-on: [macOS-latest]
+   needs: [createAndroidRelease, createiOSRelease]
+   steps:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
