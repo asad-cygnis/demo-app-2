@@ -1,3 +1,7 @@
+// On top of your file import a JSON parser
+import groovy.json.JsonSlurper
+
+
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
@@ -134,6 +138,13 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+// Create an easy to use function
+def getEnvNameFromNpm() {
+    def inputFile = new File("$rootDir/../package.json")
+    def packageJson = new JsonSlurper().parseText(inputFile.text)
+    return packageJson["version"].substring(packageJson["version"].lastIndexOf("-")  + 1)
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -148,7 +159,7 @@ android {
         versionCode 3
         versionName "1.0.2"
 
-        println "data time " + "$System.env.GOOGLE_MAPS_API_KEY"
+        println "data time " + getEnvNameFromNpm()
         manifestPlaceholders = [GOOGLE_MAPS_API_KEY: "AIzaSyAR40p-a6Vcyn1Y8NTDouUdzBYgP9DuNUk"]
         missingDimensionStrategy 'react-native-camera', 'general'
         missingDimensionStrategy 'store', 'play'
@@ -196,12 +207,12 @@ android {
         }
         applicationVariants.all { variant ->
             variant.outputs.all {
-                 outputFileName = "SEMANTIC-DEMO-" + variant.versionName + "-" + formattedDate + ".apk"
+                 outputFileName = "SEMANTIC-DEMO-" + getEnvNameFromNpm() + "-" + variant.versionName + "-" + formattedDate + ".apk"
             }
         }
     } 
 
-    // applicationVariants are e.g. debug, release
+    // applicationVariants are e.g. debug, release 
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:

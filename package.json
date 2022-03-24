@@ -2,7 +2,7 @@
   "name": "tbcRN",
   "buildNumber": 3,
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.2-DEV",
   "scripts": {
     "android": "npx react-native run-android --verbose --appId='com.milnesmayltd.thebarcode'",
     "ios": "npx react-native run-ios",
