@@ -52,6 +52,7 @@ jobs:
         run: yarn install
 
       - name: Set Env
+        run: echo ${{needs.setUpEnv.outputs.currentEnv}}
         run: yarn ${{needs.setUpEnv.outputs.currentEnv}}
 
       - name: Install the Apple certificate and provisioning profile
