@@ -6,6 +6,9 @@ on:
 jobs:
   setUpEnv:
     runs-on: [macOS-latest]
+
+    outputs:
+      currentEnv: ${{steps.step1.outputs.env}}
     steps:
       - uses: actions/checkout@v2
 
@@ -24,16 +27,16 @@ jobs:
         run: exit 1
 
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
-        run: yarn env:dev
+        run: echo "::set-output name=env::env:dev"
 
       - if: contains(steps.get_tag_version.outputs.tag,'qa')
-        run: yarn env:qa
+        run: echo "::set-output name=env::env:qa"
 
       - if: contains(steps.get_tag_version.outputs.tag,'stag')
-        run: yarn env:stag
+        run: echo "::set-output name=env::env:stag"
 
       - if: contains(steps.get_tag_version.outputs.tag,'prod')
-        run: yarn env:prod
+        run: echo "::set-output name=env::env:prod"
 
   createiOSRelease:
     runs-on: [macOS-latest]
@@ -46,6 +49,9 @@ jobs:
 
       - name: yarn install
         run: yarn install
+
+      -name: Set Env
+       run: yarn needs.setUpEnv.outputs.env   
 
       - name: Install the Apple certificate and provisioning profile
         env:
