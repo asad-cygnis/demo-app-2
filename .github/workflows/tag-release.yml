@@ -8,7 +8,7 @@ jobs:
     runs-on: [macOS-latest]
 
     outputs:
-      currentEnv: ${{steps.step1.outputs.env}}
+      currentEnv: ${{steps.get_tag_version.outputs.env}}
 
     steps:
       # - uses: actions/checkout@v2
@@ -52,7 +52,7 @@ jobs:
         run: yarn install
 
       - name: Set Env
-        run: yarn ${{needs.setUpEnv.steps.get_tag_version.outputs.tag}}
+        run: yarn ${{needs.setUpEnv.outputs.currentEnv}}
 
       - name: Install the Apple certificate and provisioning profile
         env:
