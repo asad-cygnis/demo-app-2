@@ -78,69 +78,69 @@ jobs:
 
       - name: Make iOS Release
         run: yarn releaseIOS
-      
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: release-ipa
-          path: builds/**/*.ipa   
+          path: builds/**/*.ipa
 
   createAndroidRelease:
-   runs-on: [macOS-latest]
-   needs: [setUpEnv]
-   steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        cache: "yarn"
-    - name: yarn install
-      run: yarn install
-    - name: Cache Gradle Wrapper
-      uses: actions/cache@v2
-      with:
-        path: ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-    - name: Cache Gradle Dependencies
-      uses: actions/cache@v2
-      with:
-        path: ~/.gradle/caches
-        key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-caches-
-    - name: Make Android Release
-      run: yarn releaseApk
-   
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: release-apk
-        path: android/**/*.apk
+    runs-on: [macOS-latest]
+    needs: [setUpEnv]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
+      - name: yarn install
+        run: yarn install
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+      - name: Make Android Release
+        run: yarn releaseApk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: release-apk
+          path: /android/**/*.apk
 
   publishRelease:
-   runs-on: [macOS-latest]
-   needs: [createAndroidRelease]
-   steps:
-    - name: Download artifact android
-      uses: actions/download-artifact@v1
-      with:
-        name: release-apk
+    runs-on: [macOS-latest]
+    needs: [createAndroidRelease]
+    steps:
+      - name: Download artifact android
+        uses: actions/download-artifact@v1
+        with:
+          name: release-apk
 
-    - name: Download artifact from ios
-      uses: actions/download-artifact@v1
-      with:
-        name: release-ipa
+      - name: Download artifact from ios
+        uses: actions/download-artifact@v1
+        with:
+          name: release-ipa
 
-    - name: Set apk and ipa as output parameters
-      id: set_outputs
-      run: |
-           echo "::set-output name=release-apk::$(<release-apk/android/**/*.apk)"
-           echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"     
+      - name: Set apk and ipa as output parameters
+        id: set_outputs
+        run: |
+          echo "::set-output name=release-apk::$(<release-apk/android/**/*.apk)"
+          echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
 
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: false
-        title: ${{steps.get_tag_version.outputs.tag}}
-        files: |     
-          ${{ steps.set_outputs.outputs.release-apk }}
-          ${{ steps.set_outputs.outputs.release-ipa }}
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: ${{steps.get_tag_version.outputs.tag}}
+          files: |
+            ${{ steps.set_outputs.outputs.release-apk }}
+            ${{ steps.set_outputs.outputs.release-ipa }}
