@@ -80,7 +80,7 @@ jobs:
         run: yarn releaseIOS
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: release-ipa
           path: builds/**/*.ipa
@@ -111,7 +111,7 @@ jobs:
         run: yarn releaseApk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: release-apk
           path: /android/**/*.apk
@@ -121,12 +121,12 @@ jobs:
     needs: [createAndroidRelease]
     steps:
       - name: Download artifact android
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
           name: release-apk
 
       - name: Download artifact from ios
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
           name: release-ipa
 
