@@ -112,13 +112,14 @@ jobs:
 
   publishRelease:
   runs-on: [macOS-latest]
-  needs: [createAndroidRelease,createiOSRelease]
+  needs: [createAndroidRelease, createiOSRelease]
   steps:
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          title: ${{steps.get_tag_version.outputs.tag}}
-          files: |
-            android/**/*.apk
-            builds/**/*.ipa        
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        title: ${{steps.get_tag_version.outputs.tag}}
+        files: |
+          android/**/*.apk
+          builds/**/*.ipa        
+ 
