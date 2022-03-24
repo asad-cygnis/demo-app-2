@@ -83,7 +83,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-ipa
-          path: builds/**/*.ipa
+          path: builds/ipa/SEMANTIC-DEMO.ipa
 
   createAndroidRelease:
     runs-on: [macOS-latest]
@@ -114,7 +114,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: /android/**/*.apk
+          path: android/app/build/outputs/apk/release/
 
   publishRelease:
     runs-on: [macOS-latest]
