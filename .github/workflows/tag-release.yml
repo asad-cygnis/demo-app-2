@@ -35,7 +35,7 @@ jobs:
       - if: contains(steps.get_tag_version.outputs.tag,'prod')
         run: yarn env:prod
 
-  release:
+  createiOSRelease:
     runs-on: [macOS-latest]
     needs: [setUpEnv]
     steps:
@@ -79,6 +79,33 @@ jobs:
       - name: Make iOS Release
         run: yarn releaseIOS
 
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: release-apk
+      #     path: android/app/build/outputs/apk/release
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          title: ${{steps.get_tag_version.outputs.tag}}
+          files: |
+            android/**/*.apk
+            builds/**/*.ipa
+
+    createAndroidRelease:
+    runs-on: [macOS-latest]
+    needs: [setUpEnv]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
+
+      - name: yarn install
+        run: yarn install
+
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
         with:
@@ -102,6 +129,10 @@ jobs:
       #     name: release-apk
       #     path: android/app/build/outputs/apk/release
 
+    publishRelease:
+    runs-on: [macOS-latest]
+    needs: [createAndroidRelease,createiOSRelease]
+    steps:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -109,4 +140,4 @@ jobs:
           title: ${{steps.get_tag_version.outputs.tag}}
           files: |
             android/**/*.apk
-            builds/**/*.ipa
+            builds/**/*.ipa        
