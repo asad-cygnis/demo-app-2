@@ -51,7 +51,7 @@ jobs:
         run: yarn install
 
       - name: Set Env
-        run: yarn needs.setUpEnv.outputs.env   
+        run: yarn ${{needs.setUpEnv.outputs.env}}
 
       - name: Install the Apple certificate and provisioning profile
         env:
@@ -99,8 +99,13 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           cache: "yarn"
+
       - name: yarn install
         run: yarn install
+
+      - name: Set Env
+        run: yarn ${{needs.setUpEnv.outputs.env}}
+
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
         with:
