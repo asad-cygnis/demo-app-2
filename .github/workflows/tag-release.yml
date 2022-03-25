@@ -33,13 +33,7 @@ jobs:
       - id: step1
         run: |
            if ${{ contains(steps.get_tag_version.outputs.tag,'dev') }} == true; then
-              echo "::set-output name=env::env:dev"
-           else if ${{ contains(steps.get_tag_version.outputs.tag,'qa') }} == true; then
-              echo "::set-output name=env::env:qa"
-           else if ${{ contains(steps.get_tag_version.outputs.tag,'stag') }} == true; then
-              echo "::set-output name=env::env:stag"
-           else if ${{ contains(steps.get_tag_version.outputs.tag,'prod') }} == true; then
-              echo "::set-output name=env::env:prod"   
+              echo "::set-output name=env::env:dev"  
            fi; 
 
       - name: ECHO
