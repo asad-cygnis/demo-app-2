@@ -135,7 +135,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: android/app/release/app-release.aab
+          path: android/**/*.aab
 
   publishRelease:
     runs-on: [macOS-latest]
@@ -167,7 +167,7 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          title: ${{steps.get_tag_version.outputs.tag}}
+          # title: ${{steps.get_tag_version.outputs.tag}}
           files: |
             ${{ steps.set_outputs.outputs.release-apk }}
             # ${{ steps.set_outputs.outputs.release-ipa }}
