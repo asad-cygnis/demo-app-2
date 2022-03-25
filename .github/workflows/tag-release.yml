@@ -178,6 +178,6 @@ jobs:
           automatic_release_tag: true
           # title: ${{steps.get_tag_version.outputs.tag}}
           files: |
-            /Users/runner/work/demo-app-2/demo-app-2/android/**/*.aab
-            # ${{ steps.set_outputs.outputs.release-apk }}
-            # ${{ steps.set_outputs.outputs.release-ipa }}
+            ${{steps.download.outputs.download-path}}/**/*.aab
+             # ${{ steps.set_outputs.outputs.release-apk }}
+             # ${{ steps.set_outputs.outputs.release-ipa }}
