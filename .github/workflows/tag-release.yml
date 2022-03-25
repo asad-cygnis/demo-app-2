@@ -28,27 +28,18 @@ jobs:
 
       - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
         # run: exit 1
-        run: echo "SET_ENV=FAILED" >> $GITHUB_ENV
+        run: echo "::set-output name=env::failed"
 
-      - if: contains(steps.get_tag_version.outputs.tag,'dev')
-        run: echo "::set-output name=env::env:dev"
-        env:
-          SET_ENV: env:dev
-
-      - if: contains(steps.get_tag_version.outputs.tag,'qa')
-        run: echo "::set-output name=env::env:qa"
-        env:
-          SET_ENV: env:qa
-
-      - if: contains(steps.get_tag_version.outputs.tag,'stag')
-        run: echo "::set-output name=env::env:stag"
-        env:
-          SET_ENV: env:stag
-
-      - if: contains(steps.get_tag_version.outputs.tag,'prod')
-        run: echo "::set-output name=env::env:prod"
-        env:
-          SET_ENV: env:prod
+      - id: step1
+        run: |
+           if: contains(steps.get_tag_version.outputs.tag,'dev')
+           echo "::set-output name=env::env:dev"
+           if: contains(steps.get_tag_version.outputs.tag,'qa')
+           echo "::set-output name=env::env:qa"
+           if: contains(steps.get_tag_version.outputs.tag,'stag')
+           echo "::set-output name=env::env:stag"
+           if: contains(steps.get_tag_version.outputs.tag,'prod')
+           echo "::set-output name=env::env:prod"
 
       - name: ECHO
         run: echo "value = ${{env.SET_ENV}}"
@@ -65,8 +56,8 @@ jobs:
       - name: Set Env
         # run: echo ${{needs.setUpEnv.outputs.currentEnv}}
         run: |
-          yarn ${{env.SET_ENV}}
-          echo ${{env.SET_ENV}}
+          yarn ${{needs.setUpEnv.outputs.currentEnv}}
+          echo ${{needs.setUpEnv.outputs.currentEnv}}
 
       - name: yarn install
         run: yarn install
