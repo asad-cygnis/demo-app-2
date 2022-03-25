@@ -157,7 +157,7 @@ jobs:
       - name: Set apk and ipa as output parameters
         id: set_outputs
         run: |
-          echo "::set-output name=release-apk::$(<release-apk/**/*)"
+          echo "::set-output name=release-apk::$(<release-apk/app/**/*.aab)"
           echo  ${{ steps.set_outputs.outputs.release-apk }}
           # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
 
