@@ -4,6 +4,9 @@ on:
   push:
     branches: [workflow-concurrent-jobs]
     tags: ["v[0-9].[0-9]+.[0-9]+-*"]
+
+env:
+  SET_ENV: ""
 jobs:
   setUpEnv:
     runs-on: [macOS-latest]
@@ -25,23 +28,28 @@ jobs:
         id: get_tag_version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
-      - name: Abc
-        id: step1
-        run: |
-          if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
-          exit 1
+      - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
+        run: exit 1
 
-          if: contains(steps.get_tag_version.outputs.tag,'dev')
-          echo "::set-output name=env::env:dev"
+      - if: contains(steps.get_tag_version.outputs.tag,'dev')
+        run: echo "::set-output name=env::env:dev"
+        env:
+          SET_ENV: env:dev
 
-          if: contains(steps.get_tag_version.outputs.tag,'qa')
-          echo "::set-output name=env::env:qa"
+      - if: contains(steps.get_tag_version.outputs.tag,'qa')
+        run: echo "::set-output name=env::env:qa"
+        env:
+          SET_ENV: env:qa
 
-          if: contains(steps.get_tag_version.outputs.tag,'stag')
-          echo "::set-output name=env::env:stag"
+      - if: contains(steps.get_tag_version.outputs.tag,'stag')
+        run: echo "::set-output name=env::env:stag"
+        env:
+          SET_ENV: env:stag
 
-          if: contains(steps.get_tag_version.outputs.tag,'prod')
-          echo "::set-output name=env::env:prod"
+      - if: contains(steps.get_tag_version.outputs.tag,'prod')
+        run: echo "::set-output name=env::env:prod"
+        env:
+          SET_ENV: env:prod
 
   createiOSRelease:
     runs-on: [macOS-latest]
@@ -58,8 +66,8 @@ jobs:
       - name: Set Env
         # run: echo ${{needs.setUpEnv.outputs.currentEnv}}
         run: |
-          yarn ${{needs.setUpEnv.outputs.currentEnv}}
-          echo ${{needs.setUpEnv.outputs.currentEnv}}
+          yarn ${{env.SET_ENV}}
+          echo ${{env.SET_ENV}}
 
       - name: Install the Apple certificate and provisioning profile
         env:
