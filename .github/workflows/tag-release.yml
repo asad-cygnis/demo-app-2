@@ -27,17 +27,22 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
       - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
-        # run: exit 1
-        run: echo "::set-output name=env::failed"
+        run: exit 1
 
       - id: step1
         run: |
            if ${{ contains(steps.get_tag_version.outputs.tag,'dev') }} == true; then
               echo "::set-output name=env::env:dev"  
            fi; 
-
-      - name: ECHO
-        run: echo "value = ${{env.SET_ENV}}"
+           if ${{ contains(steps.get_tag_version.outputs.tag,'qa') }} == true; then
+              echo "::set-output name=env::env:qa"
+           fi; 
+           if ${{ contains(steps.get_tag_version.outputs.tag,'stag') }} == true; then
+              echo "::set-output name=env::env:stag"
+           fi; 
+           if ${{ contains(steps.get_tag_version.outputs.tag,'prod') }} == true; then
+              echo "::set-output name=env::env:prod" 
+           fi; 
 
   createiOSRelease:
     runs-on: [macOS-latest]
