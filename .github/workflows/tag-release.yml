@@ -30,7 +30,7 @@ jobs:
 
       - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
         run: exit 1
-         env:
+        env:
           SET_ENV: FAILED
 
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
