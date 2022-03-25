@@ -9,7 +9,7 @@ jobs:
     runs-on: [macOS-latest]
 
     outputs:
-      currentEnv: ${{steps.outputs.tag}}
+      currentEnv: ${{steps.step1.outputs.env}}
 
     steps:
       # - uses: actions/checkout@v2
@@ -25,20 +25,23 @@ jobs:
         id: get_tag_version
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
-      - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
-        run: exit 1
+      - name: Abc
+        id: step1
+        run: |
+          if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
+          exit 1
 
-      - if: contains(steps.get_tag_version.outputs.tag,'dev')
-        run: echo "::set-output name=env::env:dev"
+          if: contains(steps.get_tag_version.outputs.tag,'dev')
+          echo "::set-output name=env::env:dev"
 
-      - if: contains(steps.get_tag_version.outputs.tag,'qa')
-        run: echo "::set-output name=env::env:qa"
+          if: contains(steps.get_tag_version.outputs.tag,'qa')
+          echo "::set-output name=env::env:qa"
 
-      - if: contains(steps.get_tag_version.outputs.tag,'stag')
-        run: echo "::set-output name=env::env:stag"
+          if: contains(steps.get_tag_version.outputs.tag,'stag')
+          echo "::set-output name=env::env:stag"
 
-      - if: contains(steps.get_tag_version.outputs.tag,'prod')
-        run: echo "::set-output name=env::env:prod"
+          if: contains(steps.get_tag_version.outputs.tag,'prod')
+          echo "::set-output name=env::env:prod"
 
   createiOSRelease:
     runs-on: [macOS-latest]
