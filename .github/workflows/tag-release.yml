@@ -32,15 +32,15 @@ jobs:
 
       - id: step1
         run: |
-           if ${{ contains(steps.get_tag_version.outputs.tag,'dev') }}
+           if ${{ contains(steps.get_tag_version.outputs.tag,'dev') }} == true; then
            echo "::set-output name=env::env:dev"
-           if ${{ contains(steps.get_tag_version.outputs.tag,'qa') }}
+           if ${{ contains(steps.get_tag_version.outputs.tag,'qa') }} == true; then
            echo "::set-output name=env::env:qa"
-           if ${{ contains(steps.get_tag_version.outputs.tag,'stag') }}
+           if ${{ contains(steps.get_tag_version.outputs.tag,'stag') }} == true; then
            echo "::set-output name=env::env:stag"
-           if ${{ contains(steps.get_tag_version.outputs.tag,'prod') }}
+           if ${{ contains(steps.get_tag_version.outputs.tag,'prod') }} == true; then
            echo "::set-output name=env::env:prod"
-           fi
+         
 
       - name: ECHO
         run: echo "value = ${{env.SET_ENV}}"
