@@ -9,7 +9,7 @@ jobs:
     runs-on: [macOS-latest]
 
     outputs:
-      currentEnv: ${{steps.get_tag_version.outputs.tag}}
+      currentEnv: ${{steps.outputs.tag}}
 
     steps:
       # - uses: actions/checkout@v2
