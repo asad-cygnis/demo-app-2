@@ -146,6 +146,7 @@ jobs:
         id: download
         with:
           name: release-apk
+          path: build/
 
       - name: Display structure of downloaded files
         run: ls -R
