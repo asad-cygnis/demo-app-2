@@ -154,7 +154,7 @@ jobs:
       - name: Set apk and ipa as output parameters
         id: set_outputs
         run: |
-          echo "::set-output name=release-apk::$(<release-apk/**/*)"
+          echo "::set-output name=release-apk::$(<release-apk/android/**/*.aab)"
           echo  ${{ steps.set_outputs.outputs.release-apk }}
           # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
 
@@ -167,6 +167,7 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
+          automatic_release_tag: true
           # title: ${{steps.get_tag_version.outputs.tag}}
           files: |
             ${{ steps.set_outputs.outputs.release-apk }}
