@@ -97,7 +97,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-ipa
-          path: builds/ipa/SEMANTIC-DEMO.ipa
+          path: builds/**/*.ipa
 
   createAndroidRelease:
     runs-on: [macOS-latest]
@@ -135,7 +135,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: android/**/*.aab
+          path: android/app/**/*.apk
 
   publishRelease:
     runs-on: [macOS-latest]
@@ -185,5 +185,5 @@ jobs:
           prerelease: false
           title: ${{steps.get_tag_version.outputs.tag}}
           files: |
-            ${{steps.download-android.outputs.download-path}}/**/*.aab
-            ${{steps.download.ios.download-path}}/**/*.aab
+            ${{steps.download-android.outputs.download-path}}/**/*.apk
+            ${{steps.download-ios.outputs.download-path}}/**/*.ipa
