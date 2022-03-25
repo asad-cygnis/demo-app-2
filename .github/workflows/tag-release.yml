@@ -13,14 +13,14 @@ jobs:
       currentEnv: ${{steps.step1.outputs.env}}
 
     steps:
-      # - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      # - uses: actions/setup-node@v2
-      #   with:
-      #     cache: "yarn"
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
 
-      # - name: yarn install
-      #   run: yarn install
+      - name: yarn install
+        run: yarn install
 
       - name: Check Tag
         id: get_tag_version
@@ -31,18 +31,18 @@ jobs:
 
       - id: step1
         run: |
-           if ${{ contains(steps.get_tag_version.outputs.tag,'dev') }} == true; then
-              echo "::set-output name=env::env:dev"  
-           fi; 
-           if ${{ contains(steps.get_tag_version.outputs.tag,'qa') }} == true; then
-              echo "::set-output name=env::env:qa"
-           fi; 
-           if ${{ contains(steps.get_tag_version.outputs.tag,'stag') }} == true; then
-              echo "::set-output name=env::env:stag"
-           fi; 
-           if ${{ contains(steps.get_tag_version.outputs.tag,'prod') }} == true; then
-              echo "::set-output name=env::env:prod" 
-           fi; 
+          if ${{ contains(steps.get_tag_version.outputs.tag,'dev') }} == true; then
+             echo "::set-output name=env::env:dev"  
+          fi; 
+          if ${{ contains(steps.get_tag_version.outputs.tag,'qa') }} == true; then
+             echo "::set-output name=env::env:qa"
+          fi; 
+          if ${{ contains(steps.get_tag_version.outputs.tag,'stag') }} == true; then
+             echo "::set-output name=env::env:stag"
+          fi; 
+          if ${{ contains(steps.get_tag_version.outputs.tag,'prod') }} == true; then
+             echo "::set-output name=env::env:prod" 
+          fi;
 
   createiOSRelease:
     runs-on: [macOS-latest]
@@ -53,14 +53,13 @@ jobs:
         with:
           cache: "yarn"
 
+      - name: yarn install
+        run: yarn install
+
       - name: Set Env
-        # run: echo ${{needs.setUpEnv.outputs.currentEnv}}
         run: |
           yarn ${{needs.setUpEnv.outputs.currentEnv}}
           echo ${{needs.setUpEnv.outputs.currentEnv}}
-
-      - name: yarn install
-        run: yarn install
 
       - name: Install the Apple certificate and provisioning profile
         env:
@@ -104,12 +103,6 @@ jobs:
     runs-on: [macOS-latest]
     needs: [setUpEnv]
     steps:
-      - name: Set Env
-        # run: yarn ${{needs.setUpEnv.outputs.currentEnv}}
-        run: |
-          yarn ${{needs.setUpEnv.outputs.currentEnv}}
-          echo ${{needs.setUpEnv.outputs.currentEnv}}
-
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -117,6 +110,11 @@ jobs:
 
       - name: yarn install
         run: yarn install
+
+      - name: Set Env
+        run: |
+          yarn ${{needs.setUpEnv.outputs.currentEnv}}
+          echo ${{needs.setUpEnv.outputs.currentEnv}}
 
       - name: Cache Gradle Wrapper
         uses: actions/cache@v2
