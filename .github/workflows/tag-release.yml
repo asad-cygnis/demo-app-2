@@ -143,41 +143,47 @@ jobs:
     steps:
       - name: Download artifact android
         uses: actions/download-artifact@v2
-        id: download
+        id: download-android
         with:
           name: release-apk
           path: build/
 
-      - name: Display structure of downloaded files
+      - name: Display structure of downloaded files Android
         run: ls -R
 
-      - name: "Echo download path"
-        run: echo ${{steps.download.outputs.download-path}}
+      - name: "Echo download path Android"
+        run: echo ${{steps.download-android.outputs.download-path}}
 
-      # - name: Download artifact from ios
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: release-ipa
+      - name: Download artifact from ios
+        uses: actions/download-artifact@v2
+        id: download-ios
+        with:
+          name: release-ipa
+          path: build/
 
-      - name: Set apk and ipa as output parameters
-        id: set_outputs
-        run: |
-          echo "::set-output name=release-apk::$(<release-apk/app/**/*.aab)"
-          echo  ${{ steps.set_outputs.outputs.release-apk }}
-          # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
+      - name: Display structure of downloaded files iOS
+        run: ls -R
 
-      - name: Show the values of the outputs
-        run: |
-          # using the syntax steps.<step_id>.outputs.<output_name> to access the output parameters
-          echo "status_job1 = ${{ steps.set_outputs.outputs.release-apk }}"
+      - name: "Echo download path iOS"
+        run: echo ${{steps.download-ios.outputs.download-path}}
+
+      # - name: Set apk and ipa as output parameters
+      #   id: set_outputs
+      #   run: |
+      #     echo "::set-output name=release-apk::$(<release-apk/app/**/*.aab)"
+      #     echo  ${{ steps.set_outputs.outputs.release-apk }}
+      #     # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
+
+      # - name: Show the values of the outputs
+      #   run: |
+      #     # using the syntax steps.<step_id>.outputs.<output_name> to access the output parameters
+      #     echo "status_job1 = ${{ steps.set_outputs.outputs.release-apk }}"
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: true
-          # title: ${{steps.get_tag_version.outputs.tag}}
+          title: ${{steps.get_tag_version.outputs.tag}}
           files: |
-            ${{steps.download.outputs.download-path}}/**/*.aab
-             # ${{ steps.set_outputs.outputs.release-apk }}
-             # ${{ steps.set_outputs.outputs.release-ipa }}
+            ${{steps.download-android.outputs.download-path}}/**/*.aab
+            ${{steps.download.ios.download-path}}/**/*.aab
