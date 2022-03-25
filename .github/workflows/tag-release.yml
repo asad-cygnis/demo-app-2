@@ -144,7 +144,7 @@ jobs:
       - name: Download artifact android
         uses: actions/download-artifact@v2
         with:
-          name: release-apk
+          name: downloaded-apk
 
       # - name: Download artifact from ios
       #   uses: actions/download-artifact@v2
@@ -154,7 +154,7 @@ jobs:
       - name: Set apk and ipa as output parameters
         id: set_outputs
         run: |
-          echo "::set-output name=release-apk::$(<release-apk/**/*.aab)"
+          echo "::set-output name=release-apk::$(<downloaded-apk/release-apk)"
           echo  ${{ steps.set_outputs.outputs.release-apk }}
           # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
 
