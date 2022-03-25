@@ -135,7 +135,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: /android/app/release/
+          path: android/app/release/app-release.aab
 
   publishRelease:
     runs-on: [macOS-latest]
