@@ -103,39 +103,39 @@ jobs:
     runs-on: [macOS-latest]
     needs: [setUpEnv]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          cache: "yarn"
+      # - uses: actions/checkout@v2
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     cache: "yarn"
 
-      - name: yarn install
-        run: yarn install
+      # - name: yarn install
+      #   run: yarn install
 
-      - name: Set Env
-        run: |
-          yarn ${{needs.setUpEnv.outputs.currentEnv}}
-          echo ${{needs.setUpEnv.outputs.currentEnv}}
+      # - name: Set Env
+      #   run: |
+      #     yarn ${{needs.setUpEnv.outputs.currentEnv}}
+      #     echo ${{needs.setUpEnv.outputs.currentEnv}}
 
-      - name: Cache Gradle Wrapper
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-      - name: Cache Gradle Dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-caches-
-      - name: Make Android Release
-        run: yarn releaseApk
+      # - name: Cache Gradle Wrapper
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/.gradle/wrapper
+      #     key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      # - name: Cache Gradle Dependencies
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/.gradle/caches
+      #     key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-gradle-caches-
+      # - name: Make Android Release
+      #   run: yarn releaseApk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: release-apk
-          path: android/app/build/outputs/apk/release/
+          path: android/app/
 
   publishRelease:
     runs-on: [macOS-latest]
@@ -154,7 +154,8 @@ jobs:
       - name: Set apk and ipa as output parameters
         id: set_outputs
         run: |
-          echo "::set-output name=release-apk::$(<release-apk/android/app/build/outputs/apk/release/)"
+          echo "::set-output name=release-apk::$(<release-apk/**/*)"
+          echo  ${{ steps.set_outputs.outputs.release-apk }}
           # echo "::set-output name=release-ipa::$(<release-ipa/builds/**/*.ipa)"
 
       - name: Show the values of the outputs
