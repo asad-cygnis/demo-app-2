@@ -6,7 +6,7 @@ on:
     tags: ["v[0-9].[0-9]+.[0-9]+-*"]
 
 env:
-  SET_ENV: ""
+  SET_ENV: "MY_ENV_VAALUE"
 jobs:
   setUpEnv:
     runs-on: [macOS-latest]
@@ -30,6 +30,8 @@ jobs:
 
       - if: (!endsWith(steps.get_tag_version.outputs.tag,'-dev') && !endsWith(steps.get_tag_version.outputs.tag,'-stag') && !endsWith(steps.get_tag_version.outputs.tag,'-qa') && !endsWith(steps.get_tag_version.outputs.tag,'-prod') )
         run: exit 1
+         env:
+          SET_ENV: FAILED
 
       - if: contains(steps.get_tag_version.outputs.tag,'dev')
         run: echo "::set-output name=env::env:dev"
@@ -60,14 +62,14 @@ jobs:
         with:
           cache: "yarn"
 
-      - name: yarn install
-        run: yarn install
-
       - name: Set Env
         # run: echo ${{needs.setUpEnv.outputs.currentEnv}}
         run: |
           yarn ${{env.SET_ENV}}
           echo ${{env.SET_ENV}}
+
+      - name: yarn install
+        run: yarn install
 
       - name: Install the Apple certificate and provisioning profile
         env:
